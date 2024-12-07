@@ -33,9 +33,12 @@ public class PatientEntity {
 	@JoinColumn(name = "address_id")
 	private AddressEntity address; // Unidirectional from parent (Patient)
 
-	@OneToMany(mappedBy = "patient")
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<VisitEntity> visits; // Bidirectional
 
+	private Double height; // Example of a non-String field
+
+	// Getters and setters
 	public Long getId() {
 		return id;
 	}
@@ -106,5 +109,13 @@ public class PatientEntity {
 
 	public void setVisits(List<VisitEntity> visits) {
 		this.visits = visits;
+	}
+
+	public Double getHeight() {
+		return height;
+	}
+
+	public void setHeight(Double height) {
+		this.height = height;
 	}
 }

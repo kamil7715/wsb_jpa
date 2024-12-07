@@ -28,6 +28,7 @@ public class VisitEntity {
 	@OneToMany(mappedBy = "visit")
 	private List<MedicalTreatmentEntity> medicalTreatments; // Bidirectional
 
+	// Getters and setters
 	public Long getId() {
 		return id;
 	}
