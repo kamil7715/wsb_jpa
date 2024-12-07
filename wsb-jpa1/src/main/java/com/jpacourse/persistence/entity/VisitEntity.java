@@ -1,13 +1,8 @@
 package com.jpacourse.persistence.entity;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "VISIT")
@@ -21,6 +16,17 @@ public class VisitEntity {
 
 	@Column(nullable = false)
 	private LocalDateTime time;
+
+	@ManyToOne
+	@JoinColumn(name = "doctor_id")
+	private DoctorEntity doctor; // Bidirectional
+
+	@ManyToOne
+	@JoinColumn(name = "patient_id")
+	private PatientEntity patient; // Bidirectional
+
+	@OneToMany(mappedBy = "visit")
+	private List<MedicalTreatmentEntity> medicalTreatments; // Bidirectional
 
 	public Long getId() {
 		return id;
@@ -46,4 +52,27 @@ public class VisitEntity {
 		this.time = time;
 	}
 
+	public DoctorEntity getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(DoctorEntity doctor) {
+		this.doctor = doctor;
+	}
+
+	public PatientEntity getPatient() {
+		return patient;
+	}
+
+	public void setPatient(PatientEntity patient) {
+		this.patient = patient;
+	}
+
+	public List<MedicalTreatmentEntity> getMedicalTreatments() {
+		return medicalTreatments;
+	}
+
+	public void setMedicalTreatments(List<MedicalTreatmentEntity> medicalTreatments) {
+		this.medicalTreatments = medicalTreatments;
+	}
 }

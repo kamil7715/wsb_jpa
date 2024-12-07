@@ -2,14 +2,7 @@ package com.jpacourse.persistence.entity;
 
 import com.jpacourse.persistence.enums.TreatmentType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "MEDICAL_TREATMENT")
@@ -24,6 +17,10 @@ public class MedicalTreatmentEntity {
 
 	@Enumerated(EnumType.STRING)
 	private TreatmentType type;
+
+	@ManyToOne
+	@JoinColumn(name = "visit_id")
+	private VisitEntity visit; // Bidirectional
 
 	public Long getId() {
 		return id;
@@ -49,4 +46,11 @@ public class MedicalTreatmentEntity {
 		this.type = type;
 	}
 
+	public VisitEntity getVisit() {
+		return visit;
+	}
+
+	public void setVisit(VisitEntity visit) {
+		this.visit = visit;
+	}
 }
