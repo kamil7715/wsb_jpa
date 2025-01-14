@@ -38,6 +38,10 @@ public class PatientEntity {
 
 	private Double height; // Example of a non-String field
 
+	@Version
+	@Column(nullable = false, columnDefinition = "int default 0")
+	private int version = 0;
+
 	// Getters and setters
 	public Long getId() {
 		return id;
@@ -117,5 +121,13 @@ public class PatientEntity {
 
 	public void setHeight(Double height) {
 		this.height = height;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }
