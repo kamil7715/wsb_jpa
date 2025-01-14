@@ -1,6 +1,8 @@
 package com.jpacourse.rest;
 
 import com.jpacourse.dto.PatientTO;
+import com.jpacourse.mapper.PatientMapper;
+import com.jpacourse.persistence.entity.PatientEntity;
 import com.jpacourse.rest.exception.EntityNotFoundException;
 import com.jpacourse.service.PatientService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +18,11 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping("/patient/{id}")
+    @GetMapping("/patients/{id}")
     public PatientTO findById(@PathVariable Long id) {
-        PatientTO patient = patientService.findById(id);
+        PatientEntity patient = patientService.findById(id);
         if (patient != null) {
-            return patient;
+            return PatientMapper.mapToTO(patient);
         }
         throw new EntityNotFoundException(id);
     }
